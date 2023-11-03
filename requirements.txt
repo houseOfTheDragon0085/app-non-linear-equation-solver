@@ -2,3 +2,4 @@ streamlit
 pandas
 sympy
 scipy
+numpy
