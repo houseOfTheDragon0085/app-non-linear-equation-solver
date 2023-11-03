@@ -1,0 +1,12 @@
+# Virtual Environment
+venv
+
+# Compiled Python files
+__pycache__
+
+# Other temporary files
+.DS_Store
+.env
+
+# Exclude data files if they are large
+data
