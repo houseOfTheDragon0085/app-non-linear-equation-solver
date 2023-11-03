@@ -27,9 +27,9 @@ else:
         x, y, w = z
 
         F = np.empty((3))
-        F[0] = equation1_sym.subs({x: x, y: y, w: w}).evalf()
-        F[1] = equation2_sym.subs({x: x, y: y, w: w}).evalf()
-        F[2] = equation3_sym.subs({x: x, y: y, w: w}).evalf()
+        F[0] = equation1_sym.subs({x: x, y: y, w: w}).rhs  # Extract the right-hand side
+        F[1] = equation2_sym.subs({x: x, y: y, w: w}).rhs
+        F[2] = equation3_sym.subs({x: x, y: y, w: w}).rhs
         return F
 
     zGuess = np.array([1, 1, 1])
