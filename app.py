@@ -12,25 +12,28 @@ equation1 = st.text_input("Equation 1 (e.g., 'x**2 + y**2 - 20'):")
 equation2 = st.text_input("Equation 2 (e.g., 'y - x**2'):")
 equation3 = st.text_input("Equation 3 (e.g., 'w + 5 - x*y'):")
 
-# Define symbolic variables
-x, y, w = sym.symbols('x y w')
+if not all([equation1, equation2, equation3]):
+    st.warning("Please enter valid equations in all fields.")
+else:
+    # Define symbolic variables
+    x, y, w = sym.symbols('x y w')
 
-# Define the system of equations using sympy
-equation1_sym = sym.Eq(sym.sympify(equation1), 0)
-equation2_sym = sym.Eq(sym.sympify(equation2), 0)
-equation3_sym = sym.Eq(sym.sympify(equation3), 0)
+    # Define the system of equations using sympy
+    equation1_sym = sym.Eq(sym.sympify(equation1), 0)
+    equation2_sym = sym.Eq(sym.sympify(equation2), 0)
+    equation3_sym = sym.Eq(sym.sympify(equation3), 0)
 
-def myFunction(z):
-    x, y, w = z
+    def myFunction(z):
+        x, y, w = z
 
-    F = np.empty((3))
-    F[0] = equation1_sym.subs({x: x, y: y, w: w}).evalf()
-    F[1] = equation2_sym.subs({x: x, y: y, w: w}).evalf()
-    F[2] = equation3_sym.subs({x: x, y: y, w: w}).evalf()
-    return F
+        F = np.empty((3))
+        F[0] = equation1_sym.subs({x: x, y: y, w: w}).evalf()
+        F[1] = equation2_sym.subs({x: x, y: y, w: w}).evalf()
+        F[2] = equation3_sym.subs({x: x, y: y, w: w}).evalf()
+        return F
 
-zGuess = np.array([1, 1, 1])
+    zGuess = np.array([1, 1, 1])
 
-if st.button("Solve Equations"):
-    z = fsolve(myFunction, zGuess)
-    st.write(f"Solutions for x, y, w: {z}")
+    if st.button("Solve Equations"):
+        z = fsolve(myFunction, zGuess)
+        st.write(f"Solutions for x, y, w: {z}")
